@@ -1,0 +1,52 @@
+.header{
+  height: 95vh;
+  //if we have screen resolution that is lower than 192dpi than we will use this background image
+  background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)) ,url(../img/hero-small.jpg);
+  background-size: cover;
+  /*the back pos declaration makes sure that the img stays at the top of the container at all times/sizes*/
+  background-position: top;
+  /*research clip path */
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+
+  //safari does not support the clip path property - when clip path is not supported - do this
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0 )) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  }
+
+
+  // dots per inch (this is the resolution of the apple retina screen *high res*)
+  //this is the same logic as the min width media query - whenever the browser comes across a viewport that is higher than 192dpi than the code in the code block will be applied - and when the screen is larger than 600px
+  //this is not supported by safari - the 3rd property is for safari support
+  @media only screen and (min-resolution: 192dpi)  and (min-width:37.5em) , only screen and (min-width:125em), only screen and (-webkit-min-device-pixel-ratio:2)  {
+    background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)) ,url(../img/hero.jpg);
+  }
+
+  @include respond(phone){
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  &__logo-box{
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo{
+    height: 3.5rem;
+  }
+
+  &__text-box{
+    position: absolute;
+    /*top and left %'s are in relation to the parent element */
+    top: 40%;
+    left: 50%;
+    /*this will shift half of the width this element to the left - and half of the height of this element up */
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+}

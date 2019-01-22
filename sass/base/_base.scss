@@ -1,0 +1,45 @@
+/*No need to use normalize - this simple reset will work*/
+*,
+*::after,
+*::before{
+  margin: 0;
+  padding: 0;
+  /*so we have set the box-sizing property to inherit here - because it will force all elements to inherit this style - we set the actual box-sizing value on the body*/
+  box-sizing: inherit;
+}
+
+html{
+  /*this is a percentage that equates to 10px - however we use % as a default font size because we want the font size to scale effectively according to (if) the user changes his/her web browser*/
+  //this could be classes as typography - however this declaration is an overall setting as to how we set up the font size for the entire document
+
+  //media queries order list (desktop first) - large ones before the smaller ones - because we will have conflicting queries - meaning that if the viewport is less than 1200 and also less than 900 - which query is applied? answer = the last declaration - so therefore we needed to switch the declarations around - so  when the viewport is less than 1200 but NOT less than or equal to 900 (the 1200px query will run) - if the viewport continues to decrease than we will run the 900px query. With (mobile first approach) it would be the other way around
+
+  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+
+  @include respond(tab-land){ //width < 1200?
+    font-size: 56.25%; // we want 1 rem to = 9px , 9/16 = 56.25%
+  }
+
+  @include respond(tab-port){ //width < 900?
+    font-size: 50%; // we want 1 rem to = 8px , 8/16 = 50%
+  }
+
+  @include respond(big-desktop){
+    font-size: 75%; // we want 1 rem to = 12px , 12/16 = 75%
+  }
+
+}
+
+body{
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port){
+    padding: 0;
+  }
+}
+
+::selection{
+  background-color: $color-primary;
+  color: $color-white;
+}

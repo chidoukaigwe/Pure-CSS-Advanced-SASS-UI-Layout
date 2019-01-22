@@ -1,0 +1,46 @@
+@keyframes moveInLeft {
+
+/*start of animation - initial state*/
+/*negative value pushes element from the right hand side of the screen to the left*/
+  0%{
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+
+  /*positive value pushes element from the left hand side of the screen to the right*/
+  80%{
+    transform: translateX(1rem);
+  }
+
+/*end of animation - final state*/
+  100%{
+    opacity: 1;
+    transform: translate(0);
+  }
+
+}
+
+@keyframes moveInRight {
+  0%{
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+  80%{
+    transform: translateX(-1rem);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0%{
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  100%{
+    opacity: 1;
+    transform: translate(0);
+  }
+}

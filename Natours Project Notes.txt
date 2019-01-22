@@ -1,0 +1,9 @@
+Natours Project Notes - Need to test the website across multiple browsers
+---------------------
+Need to make the book now pop up - responsive
+Have not applied the responsive images across the board (we make people genuinely happy section)
+We have not applied the responsive images across the board (density and resolution switching)
+Implement responsive images to background images via CSS
+add JS to the navigation - when clicked taking you to the desired location and unchecking/closing the nav
+with the book now popup to be able to click outside the box on the darkened background and close the popup
+@supports css rule 

@@ -1,0 +1,123 @@
+.form{
+
+  &__group{
+
+    &:not(:last-child){
+      margin-bottom: 2rem;
+    }
+
+  }
+
+  &__input{
+    font-size: 1.5rem; //could use the default font size variable
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem; //we add an extra bit of padding to the side of the forms - for better look
+    border-radius: 2px;
+    background-color: rgba($color-white, .5);
+    border: none;
+    //we added this is here, because - when you click on the input element, the focus aspect shifts the label down 3px
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all .3s;
+
+    @include respond(tab-port){
+      width: 100%;
+    }
+
+    &:focus{
+      outline: none;
+      //for accessibility reasons, NEVER just remove the focus outline to none and leave it alone - we should always make sure their is some aspect of focus - to enable people without a mouse to know that they are using the form element.
+      box-shadow: 0 1rem 2rem rgba($color-black, .1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+  //when we have a focused input element that is invalid, apply these styles
+    &:focus:invalid{
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    &::-webkit-input-placeholder{
+      color: $color-grey-dark-2;
+    }
+
+  }
+
+  &__label{
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: .7rem;
+    display: block;
+    transition: all .3s;
+  }
+
+  //using the adjacent sibling selector - so an element that comes immediately after the element that we select in the first place
+  //the rule with using the sibling selector is  - the element you are targeting MUST come immediately after the selector your starting from - within the markup
+  &__input:placeholder-shown + &__label {
+    //we use both properties because visibility takes the element out of the flow - SO NOT TAKING SPACE
+    //opacity enables use to animate this property - so in order to execute this effect we need both
+    opacity: 0;
+    visibility: hidden;
+    //we pull the label up because in this state we have not started typing. Also coupled with the two properties in opacity and visibility - it enables us to place the text technically within the inpt box and then - when we type (have the effect) of pushing the label downwards
+    transform: translateY(-4rem);
+  }
+
+  &__radio-group{
+    width: 49%;
+    display: inline-block;
+
+    @include respond(tab-port){
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+  }
+
+  &__radio-input{
+    display: none;
+  }
+
+  &__radio-label{
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button{
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -.4rem;
+
+    &::after{
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+  }
+  //we have grabed all the radio input elements that have been checked
+  // Once we click the radio element - it becomes checked - so we use the checked psuedo class (once triggered)
+  // We select the sibling element of the 'checked' element '__radio-label' HOWEVER  we target the child which is '__radio-button' -
+  //not just targeting the child only we are looking for the child element in the after state
+  &__radio-input:checked ~ &__radio-label &__radio-button::after{
+    opacity: 1;
+  }
+
+}
